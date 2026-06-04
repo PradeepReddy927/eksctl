@@ -1,5 +1,4 @@
 # Docker Install
-
 ```bash
 dnf -y install dnf-plugins-core
 
@@ -10,13 +9,12 @@ dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-co
 systemctl start docker
 
 systemctl enable docker
-```
+
 usermod -aG docker ec2-user
 
 ```
 
 # EKSCTL Install
-
 ```bash
 ARCH=amd64
 PLATFORM=$(uname -s)_$ARCH
@@ -26,14 +24,12 @@ sudo install -m 0755 /tmp/eksctl /usr/local/bin && rm /tmp/eksctl
 ```
 
 # Kubens Install
-
 ```bash
 sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
 sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 ```
 
 # Helm Installation
-
 ```bash id="r8y6d5"
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
 
@@ -41,3 +37,24 @@ chmod 700 get_helm.sh
 
 ./get_helm.sh
 ```
+
+# KUBECTL INSTALL
+```bash
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.34.2/2025-11-13/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv kubectl /usr/local/bin/
+mkdir -p $HOME/bin && cp ./kubectl  /usr/local/bin && export PATH=$HOME/bin:$PATH
+sudo cp ./kubectl /usr/local/bin/
+---
+mkdir -p $HOME/bin
+sudo cp ./kubectl /usr/local/bin/
+export PATH=$HOME/bin:$PATH
+```
+
+#  PARTITION
+```bash
+sudo growpart /dev/nvme0n1 4
+sudo lvextend -L +30G /dev/mapper/RootVG-varVol
+sudo xfs_growfs /var
+```
+
