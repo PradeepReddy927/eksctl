@@ -1,5 +1,4 @@
-# Docker Install
-```bash
+###Docker Install
 
 ```
 dnf -y install dnf-plugins-core
