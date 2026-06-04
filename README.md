@@ -1,6 +1,6 @@
 # Docker Install
 ```bash
-```dnf -y install dnf-plugins-core
+dnf -y install dnf-plugins-core
 
 dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
 
